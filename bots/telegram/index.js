@@ -9,29 +9,28 @@ const getEvents = require("./calendarConn");
 const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 const arrayFilter = (arr) => {
-  const dateVal = `${new Date().getFullYear()}년 ${
+  const dateVal = `<b>${new Date().getFullYear()}년 ${
     new Date().getMonth() + 1
-  }월 ${new Date().getDate()}일 `;
-  if (arr.length === 0) return `${dateVal}오늘은 휴가자가 없습니다.`;
+  }월 ${new Date().getDate()}일</b> 스탠드 미팅 시간입니다. \n\n`;
+  if (arr.length === 0) return `${dateVal}오늘 휴가자는 없습니다.`;
 
-  return `${dateVal} 휴가자 목록 \n\n${arr.map((str) => `${str}\n`).join("")}`;
+  return `${dateVal}${arr.map((str) => `  ${str}\n`).join("")}`;
 };
 
 async function start() {
-  // schedule.scheduleJob("30 * * * * *", async function () {
+  // schedule.scheduleJob("1 1 10 * * *", async function () {
   //   const event = await getEvents();
 
-  //   console.log("event ::", event);
-
-  //   bot.sendMessage(process.env.BOT_ID, `오늘 휴가자 목록 \n ${event}`);
+  //   bot.sendMessage(process.env.BOT_ID, arrayFilter(event));
   // });
-
-  // const event = ["조옥상", "조옥상", "조옥상", "조옥상", "조옥상"];
 
   const event = await getEvents();
 
-  bot.sendMessage(process.env.BOT_ID, arrayFilter(event));
+  bot.sendMessage(process.env.BOT_ID, arrayFilter(event), {
+    parse_mode: "HTML",
+  });
 
+  // const event = ["조옥상", "조옥상", "조옥상", "조옥상", "조옥상"];
   // const event = await getEvents();
 
   // console.log("event ::", event);

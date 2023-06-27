@@ -71,12 +71,18 @@ async function authorize() {
  */
 const listEvents = async (auth) => {
   const calendar = google.calendar({ version: "v3", auth });
-  const dateTime = new Date("2023-06-26").toISOString();
+  const today = new Date();
+  const timeMin = new Date(
+    `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} 00:00:00`
+  );
+  const timeMax = new Date(
+    `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} 23:59:59`
+  );
 
   const res = await calendar.events.list({
     calendarId: process.env.CALENDAR_ID,
-    timeMin: new Date("2023-06-26").toISOString(),
-    timeMax: new Date("2023-06-27").toISOString(),
+    timeMin: timeMin.toISOString(),
+    timeMax: timeMax.toISOString(),
     maxResults: 10,
     singleEvents: true,
     orderBy: "startTime",
@@ -86,7 +92,7 @@ const listEvents = async (auth) => {
   if (!events || events.length === 0) {
     return [];
   }
-  console.log("Upcoming 10 events:");
+  // console.log("Upcoming 10 events:");
   return events.map((event, i) => {
     const start = event.start.dateTime || event.start.date;
     return `${event.summary}`;
