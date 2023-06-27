@@ -69,15 +69,10 @@ async function authorize() {
  * Lists the next 10 events on the user's primary calendar.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-const listEvents = async (auth) => {
+const getEvents = async (timeMin, timeMax) => {
+  const auth = await authorize();
+
   const calendar = google.calendar({ version: "v3", auth });
-  const today = new Date();
-  const timeMin = new Date(
-    `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} 00:00:00`
-  );
-  const timeMax = new Date(
-    `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} 23:59:59`
-  );
 
   const res = await calendar.events.list({
     calendarId: process.env.CALENDAR_ID,
@@ -99,8 +94,7 @@ const listEvents = async (auth) => {
   });
 };
 
-module.exports = async function getEvents() {
-  const auth = await authorize();
-  return await listEvents(auth);
+module.exports = {
+  getEvents: getEvents,
 };
 // authorize().then(listEvents).catch(console.error);
