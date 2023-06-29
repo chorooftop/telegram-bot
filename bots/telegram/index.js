@@ -18,7 +18,7 @@ const standEventFilter = (events) => {
   return `${dateVal}${events.map((str) => `  ${str}\n`).join("")}`;
 };
 
-async function start() {
+async function standMeeting() {
   const today = new Date();
 
   const startDay = startOfDay(today);
@@ -31,6 +31,15 @@ async function start() {
   });
 }
 
+function weekly() {
+  const today = new Date();
+
+  bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
+    parse_mode: "HTML",
+  });
+}
+
 module.exports = {
-  start: start,
+  standMeeting: standMeeting,
+  weekly: weekly,
 };

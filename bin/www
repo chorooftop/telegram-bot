@@ -9,7 +9,10 @@ var debug = require("debug")("ok-bot:server");
 var http = require("http");
 var telegramBot = require("../bots/telegram");
 
-telegramBot.start();
+if (process.env.START_CODE === "stand_meeting") telegramBot.standMeeting();
+
+if (process.env.START_CODE === "weekly") telegramBot.weekly();
+
 // var telegramBot = require("../bots/telegram/calendarConn");
 // telegramBot;
 
