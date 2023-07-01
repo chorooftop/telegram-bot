@@ -1,0 +1,25 @@
+name: Telegram Push
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.19.1
+          cache: npm
+
+      # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "BOT_ID=$BOT_ID" >> .env.production
+          echo "BOT_TOKEN=$BOT_TOKEN" >> .env.production
+          echo "CALENDAR_ID=$CALENDAR_ID" >> .env.production
+          echo "HOLIDAY_CALENDAR_ID=$HOLIDAY_CALENDAR_ID" >> .env.production
+        env:
+          BOT_ID: ${{ secrets.BOT_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
+          HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
+      - run: npm i
+      - run: npm run start
