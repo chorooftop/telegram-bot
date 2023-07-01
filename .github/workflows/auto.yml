@@ -21,6 +21,6 @@ jobs:
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
 
       - run: |
-      ls
-      npm install
+        ls
+        npm install
       - run: npm run start
