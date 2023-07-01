@@ -18,28 +18,39 @@ const standEventFilter = (events) => {
   return `${dateVal}${events.map((str) => `  ${str}\n`).join("")}`;
 };
 
-async function standMeeting() {
+function weekly() {
+  bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
+    parse_mode: "HTML",
+  });
+}
+
+async function start() {
   const today = new Date();
+  // const test = formatInTimeZone(today, "Asia/Seoul", "yyyyMMdd HH:mm:ss");
+
+  // const weekDay = formatInTimeZone(today, "Asia/Seoul", "d");
+  // const todayHours = today.getHours();
+
+  // console.log("test ::", test.getDay());
+
+  // if (weekDay === 4 && todayHours) {
+  //   weekly();
+  //   return;
+  // }
 
   const startDay = startOfDay(today);
   const endDay = endOfDay(today);
 
   const event = await getEvents(startDay, endDay);
 
+  // 공휴일은 메세지를 보내지 않는다
+  if (event === "HOLIDAY") return;
+
   bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
     parse_mode: "HTML",
   });
 }
 
-function weekly() {
-  const today = new Date();
-
-  bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
-    parse_mode: "HTML",
-  });
-}
-
 module.exports = {
-  standMeeting: standMeeting,
-  weekly: weekly,
+  start: start,
 };

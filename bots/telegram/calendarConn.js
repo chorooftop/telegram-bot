@@ -74,6 +74,24 @@ const getEvents = async (timeMin, timeMax) => {
 
   const calendar = google.calendar({ version: "v3", auth });
 
+  // 공휴일인지 먼저 확인
+  const holiday = await calendar.events.list({
+    calendarId: process.env.HOLIDAY_CALENDAR_ID,
+    timeMin: timeMin.toISOString(),
+    timeMax: timeMax.toISOString(),
+    maxResults: 10,
+    singleEvents: true,
+    orderBy: "startTime",
+  });
+
+  const holidayEvents = holiday.data.items;
+
+  const holidayChk = holidayEvents.findIndex(
+    (event) => event.description === "공휴일"
+  );
+
+  if (!holidayChk) return "HOLIDAY";
+
   const res = await calendar.events.list({
     calendarId: process.env.CALENDAR_ID,
     timeMin: timeMin.toISOString(),
@@ -82,14 +100,14 @@ const getEvents = async (timeMin, timeMax) => {
     singleEvents: true,
     orderBy: "startTime",
   });
+
   const events = res.data.items;
   // console.log("events ::", events);
   if (!events || events.length === 0) {
     return [];
   }
-  // console.log("Upcoming 10 events:");
-  return events.map((event, i) => {
-    const start = event.start.dateTime || event.start.date;
+  console.log("Upcoming 10 events:", events);
+  return events.map((event) => {
     return `${event.summary}`;
   });
 };
