@@ -20,13 +20,20 @@ jobs:
           echo "CALENDAR_ID=$CALENDAR_ID" >> .env.production
           echo "HOLIDAY_CALENDAR_ID=$HOLIDAY_CALENDAR_ID" >> .env.production
           echo "CREDENTIALS=$CREDENTIALS" >> .env.production
-          echo $TOKEN >> token.json
-          echo $CREDENTIALS >> credentials.json
         env:
           BOT_ID: ${{ secrets.BOT_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
+
+      - name: Google Auth File
+        run: |
+          touch token.json
+          echo $TOKEN >> token.json 
+          cat token.json
+          touch credentials.json
+          echo $CREDENTIALS >> credentials.json
+          cat credentials.json
 
       - run: npm install
       - run: npm run start
