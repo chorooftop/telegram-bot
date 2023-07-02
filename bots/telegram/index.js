@@ -25,7 +25,7 @@ function weekly() {
 }
 
 async function start() {
-  const today = new Date("2023-08-15");
+  const today = new Date();
   // const test = formatInTimeZone(today, "Asia/Seoul", "yyyyMMdd HH:mm:ss");
 
   // const weekDay = formatInTimeZone(today, "Asia/Seoul", "d");
