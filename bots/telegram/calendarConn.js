@@ -10,7 +10,6 @@ const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -34,7 +33,7 @@ async function loadSavedCredentialsIfExist() {
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
-  const content = await fs.readFile(CREDENTIALS_PATH);
+  const content = JSON.parse(process.env.CREDENTIALS);
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
@@ -57,7 +56,7 @@ async function authorize() {
   }
   client = await authenticate({
     scopes: SCOPES,
-    keyfilePath: CREDENTIALS_PATH,
+    keyfilePath: JSON.parse(process.env.CREDENTIALS),
   });
   if (client.credentials) {
     await saveCredentials(client);
@@ -102,11 +101,9 @@ const getEvents = async (timeMin, timeMax) => {
   });
 
   const events = res.data.items;
-  // console.log("events ::", events);
   if (!events || events.length === 0) {
     return [];
   }
-  console.log("Upcoming 10 events:", events);
   return events.map((event) => {
     return `${event.summary}`;
   });
@@ -115,4 +112,3 @@ const getEvents = async (timeMin, timeMax) => {
 module.exports = {
   getEvents: getEvents,
 };
-// authorize().then(listEvents).catch(console.error);
