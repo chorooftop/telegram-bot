@@ -46,9 +46,11 @@ async function start() {
   // 공휴일은 메세지를 보내지 않는다
   if (event === "HOLIDAY") return;
 
-  bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
+  await bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
     parse_mode: "HTML",
   });
+
+  process.exit();
   // });
 }
 
