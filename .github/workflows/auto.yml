@@ -1,8 +1,5 @@
 name: Telegram Push
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   deployment:
@@ -25,7 +22,6 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
-      - uses: ./
       - name: Google Auth File
         run: |
           touch token.json
@@ -34,6 +30,7 @@ jobs:
           touch credentials.json
           echo "$CREDENTIALS" >> credentials.json
           cat credentials.json
+          echo ls
         env:
           TOKEN: ${{ secrets.TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
