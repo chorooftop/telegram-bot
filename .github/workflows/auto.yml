@@ -34,6 +34,9 @@ jobs:
           touch credentials.json
           echo "$CREDENTIALS" >> credentials.json
           cat credentials.json
+        env:
+          TOKEN: ${{secrets.TOKEN}}
+          CREDENTIALS: ${{secrets.CREDENTIALS}}
 
       - run: npm install
       - run: npm run start
