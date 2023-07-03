@@ -12,13 +12,13 @@ jobs:
       # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
       - name: Generate Environment Variables File for Production
         run: |
-          echo "BOT_ID=$BOT_ID" >> .env.production
-          echo "BOT_TOKEN=$BOT_TOKEN" >> .env.production
-          echo "CALENDAR_ID=$CALENDAR_ID" >> .env.production
-          echo "HOLIDAY_CALENDAR_ID=$HOLIDAY_CALENDAR_ID" >> .env.production
-          echo "GOOGLE_PRIVATE_KEY=$GOOGLE_PRIVATE_KEY" >> .env.production
-          echo "GOOGLE_CLIENT_EMAIL=$GOOGLE_CLIENT_EMAIL" >> .env.production
-          echo "GOOGLE_PROJECT_NUMBER=$GOOGLE_PROJECT_NUMBER" >> .env.production
+          echo "BOT_ID=$BOT_ID" >> .env
+          echo "BOT_TOKEN=$BOT_TOKEN" >> .env
+          echo "CALENDAR_ID=$CALENDAR_ID" >> .env
+          echo "HOLIDAY_CALENDAR_ID=$HOLIDAY_CALENDAR_ID" >> .env
+          echo "GOOGLE_PRIVATE_KEY=$GOOGLE_PRIVATE_KEY" >> .env
+          echo "GOOGLE_CLIENT_EMAIL=$GOOGLE_CLIENT_EMAIL" >> .env
+          echo "GOOGLE_PROJECT_NUMBER=$GOOGLE_PROJECT_NUMBER" >> .env
         env:
           BOT_ID: ${{ secrets.BOT_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
