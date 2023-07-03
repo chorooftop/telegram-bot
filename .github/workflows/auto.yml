@@ -24,13 +24,13 @@ jobs:
 
       - name: Google Auth File create-json
         id: create-json-1
-        uses: jsdaniell/create-json@1.1.2
+        uses: jsdaniell/create-json@1.2.2
         with:
           name: "credentials.json"
           json: ${{ secrets.CREDENTIALS }}
       - name: Google Auth File create-json 2
         id: create-json-2
-        uses: jsdaniell/create-json@1.1.2
+        uses: jsdaniell/create-json@1.2.2
         with:
           name: "token.json"
           json: ${{ secrets.TOKEN }}
