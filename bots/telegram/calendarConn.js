@@ -35,6 +35,7 @@ async function loadSavedCredentialsIfExist() {
  */
 async function saveCredentials(client) {
   const content = await fs.readFile(CREDENTIALS_PATH);
+  console.log("content ::", content);
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
