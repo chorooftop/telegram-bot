@@ -25,7 +25,6 @@ jobs:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
-      - uses: actions/checkout@v2
       - name: Google Auth File
         run: |
           touch token.json
@@ -35,8 +34,8 @@ jobs:
           echo "$CREDENTIALS" >> credentials.json
           cat credentials.json
         env:
-          TOKEN: ${{secrets.TOKEN}}
-          CREDENTIALS: ${{secrets.CREDENTIALS}}
+          TOKEN: ${{ secrets.TOKEN }}
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - run: npm install
       - run: npm run start
