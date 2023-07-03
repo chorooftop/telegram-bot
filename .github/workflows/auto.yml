@@ -25,10 +25,14 @@ jobs:
       - name: Google Auth File
         run: |
           echo "$TOKEN" >> token.json 
-          echo "$CREDENTIALS" >> credentials.json
         env:
           TOKEN: ${{ secrets.TOKEN }}
-          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+      - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "credentials.json"
+          json: ${{ secrets.CREDENTIALS }}
 
       - run: ls -al
       - run: pwd
