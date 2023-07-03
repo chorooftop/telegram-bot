@@ -24,12 +24,8 @@ jobs:
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
       - name: Google Auth File
         run: |
-          touch token.json
           echo "$TOKEN" >> token.json 
-          cat token.json
-          touch credentials.json
           echo "$CREDENTIALS" >> credentials.json
-          cat credentials.json
         env:
           TOKEN: ${{ secrets.TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
