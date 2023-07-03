@@ -20,36 +20,36 @@ const standEventFilter = (events) => {
 
 async function start() {
   // 주간 위클리 - 목요일 오후 4시
-  const job1 = schedule.scheduleJob("53 15 * * *", async function () {
-    const today = new Date();
-    const startDay = startOfDay(today);
-    const endDay = endOfDay(today);
+  // const job1 = schedule.scheduleJob("53 * * * *", async function () {
+  //   const today = new Date();
+  //   const startDay = startOfDay(today);
+  //   const endDay = endOfDay(today);
 
-    const event = await getEvents(startDay, endDay);
+  //   const event = await getEvents(startDay, endDay);
 
-    // 공휴일은 메세지를 보내지 않는다
-    if (event === "HOLIDAY") return;
+  //   // 공휴일은 메세지를 보내지 않는다
+  //   if (event === "HOLIDAY") return;
 
-    bot.sendMessage(process.env.BOT_ID, "<b>주간 위클리</b> 공유 시간입니다.", {
-      parse_mode: "HTML",
-    });
-  });
+  //   bot.sendMessage(process.env.BOT_ID, "<b>주간 위클리</b> 공유 시간입니다.", {
+  //     parse_mode: "HTML",
+  //   });
+  // });
 
   // 스탠드 미팅 - 평일 오전 10시
-  const job2 = schedule.scheduleJob("52 15 * * *", async function () {
-    const today = new Date();
-    const startDay = startOfDay(today);
-    const endDay = endOfDay(today);
+  // const job2 = schedule.scheduleJob("52 15 * * *", async function () {
+  const today = new Date();
+  const startDay = startOfDay(today);
+  const endDay = endOfDay(today);
 
-    const event = await getEvents(startDay, endDay);
+  const event = await getEvents(startDay, endDay);
 
-    // 공휴일은 메세지를 보내지 않는다
-    if (event === "HOLIDAY") return;
+  // 공휴일은 메세지를 보내지 않는다
+  if (event === "HOLIDAY") return;
 
-    bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
-      parse_mode: "HTML",
-    });
+  bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
+    parse_mode: "HTML",
   });
+  // });
 }
 
 module.exports = {
