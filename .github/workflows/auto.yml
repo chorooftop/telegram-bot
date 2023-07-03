@@ -1,7 +1,7 @@
 name: Telegram Push
 on:
   schedule:
-    -cron: "9 * * * *"
+    - cron: "11 * * * *"
 
 jobs:
   deployment:
