@@ -16,26 +16,16 @@ jobs:
           echo "BOT_TOKEN=$BOT_TOKEN" >> .env.production
           echo "CALENDAR_ID=$CALENDAR_ID" >> .env.production
           echo "HOLIDAY_CALENDAR_ID=$HOLIDAY_CALENDAR_ID" >> .env.production
+          echo "GOOGLE_PRIVATE_KEY=$GOOGLE_PRIVATE_KEY" >> .env.production
+          echo "GOOGLE_CLIENT_EMAIL=$GOOGLE_CLIENT_EMAIL" >> .env.production
+          echo "GOOGLE_PROJECT_NUMBER=$GOOGLE_PROJECT_NUMBER" >> .env.production
         env:
           BOT_ID: ${{ secrets.BOT_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
           HOLIDAY_CALENDAR_ID: ${{ secrets.HOLIDAY_CALENDAR_ID }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_PROJECT_NUMBER: ${{ secrets.GOOGLE_PROJECT_NUMBER }}
 
-      - name: Google Auth File create-json
-        id: create-json-1
-        uses: jsdaniell/create-json@v1.2.2
-        with:
-          name: "credentials.json"
-          json: ${{ secrets.CREDENTIALS }}
-      - name: Google Auth File create-json 2
-        id: create-json-2
-        uses: jsdaniell/create-json@v1.2.2
-        with:
-          name: "token.json"
-          json: ${{ secrets.TOKEN }}
-
-      - run: ls -al
-      - run: pwd
       - run: npm install
       - run: npm run start
