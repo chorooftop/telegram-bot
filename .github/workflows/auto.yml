@@ -29,10 +29,10 @@ jobs:
       - name: Google Auth File
         run: |
           touch token.json
-          echo $TOKEN >> token.json 
+          echo "$TOKEN" >> token.json 
           cat token.json
           touch credentials.json
-          echo $CREDENTIALS >> credentials.json
+          echo "$CREDENTIALS" >> credentials.json
           cat credentials.json
 
       - run: npm install
