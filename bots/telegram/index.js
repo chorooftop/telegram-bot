@@ -38,7 +38,21 @@ async function start() {
   //   return;
   // }
 
-  const job = schedule.scheduleJob("* * * * *", async function () {
+  const job1 = schedule.scheduleJob("* * * * *", async function () {
+    const startDay = startOfDay(today);
+    const endDay = endOfDay(today);
+
+    const event = await getEvents(startDay, endDay);
+
+    // 공휴일은 메세지를 보내지 않는다
+    if (event === "HOLIDAY") return;
+
+    bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
+      parse_mode: "HTML",
+    });
+  });
+
+  const job2 = schedule.scheduleJob("* * * * *", async function () {
     const startDay = startOfDay(today);
     const endDay = endOfDay(today);
 
