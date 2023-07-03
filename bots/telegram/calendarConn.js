@@ -52,7 +52,8 @@ async function saveCredentials(client) {
  */
 async function authorize() {
   const content = await fs.readFile(CREDENTIALS_PATH);
-  console.log("content ::", content);
+  const keys = JSON.parse(content);
+  console.log("keys ::", keys);
   let client = await loadSavedCredentialsIfExist();
   if (client) {
     return client;
