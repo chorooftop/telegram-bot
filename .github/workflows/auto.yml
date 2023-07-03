@@ -1,10 +1,10 @@
 name: Telegram Push
 on:
   schedule:
-    - cron: "14 * * * *"
+    - cron: "15 * * * *"
 
 jobs:
-  deployment:
+  cron:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
