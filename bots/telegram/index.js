@@ -38,16 +38,18 @@ async function start() {
   //   return;
   // }
 
-  const startDay = startOfDay(today);
-  const endDay = endOfDay(today);
+  const job = schedule.scheduleJob("* * * * *", async function () {
+    const startDay = startOfDay(today);
+    const endDay = endOfDay(today);
 
-  const event = await getEvents(startDay, endDay);
+    const event = await getEvents(startDay, endDay);
 
-  // 공휴일은 메세지를 보내지 않는다
-  if (event === "HOLIDAY") return;
+    // 공휴일은 메세지를 보내지 않는다
+    if (event === "HOLIDAY") return;
 
-  bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
-    parse_mode: "HTML",
+    bot.sendMessage(process.env.BOT_ID, standEventFilter(event), {
+      parse_mode: "HTML",
+    });
   });
 }
 
