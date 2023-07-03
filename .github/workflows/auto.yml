@@ -35,8 +35,6 @@ jobs:
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
       - run: ls -al
-      - run: |
-          vi $(find .-name credentials.json)
-          :qa
+      - run: pwd
       - run: npm install
       - run: npm run start
