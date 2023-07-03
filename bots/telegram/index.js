@@ -18,27 +18,10 @@ const standEventFilter = (events) => {
   return `${dateVal}${events.map((str) => `  ${str}\n`).join("")}`;
 };
 
-function weekly() {
-  bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
-    parse_mode: "HTML",
-  });
-}
-
 async function start() {
-  const today = new Date();
-  // const test = formatInTimeZone(today, "Asia/Seoul", "yyyyMMdd HH:mm:ss");
-
-  // const weekDay = formatInTimeZone(today, "Asia/Seoul", "d");
-  // const todayHours = today.getHours();
-
-  // console.log("test ::", test.getDay());
-
-  // if (weekDay === 4 && todayHours) {
-  //   weekly();
-  //   return;
-  // }
-
-  const job1 = schedule.scheduleJob("* * * * *", async function () {
+  // 주간 위클리 - 목요일 오후 4시
+  const job1 = schedule.scheduleJob("53 15 * * *", async function () {
+    const today = new Date();
     const startDay = startOfDay(today);
     const endDay = endOfDay(today);
 
@@ -47,12 +30,14 @@ async function start() {
     // 공휴일은 메세지를 보내지 않는다
     if (event === "HOLIDAY") return;
 
-    bot.sendMessage(process.env.BOT_ID, "주간 위클리 공유 시간입니다.", {
+    bot.sendMessage(process.env.BOT_ID, "<b>주간 위클리</b> 공유 시간입니다.", {
       parse_mode: "HTML",
     });
   });
 
-  const job2 = schedule.scheduleJob("* * * * *", async function () {
+  // 스탠드 미팅 - 평일 오전 10시
+  const job2 = schedule.scheduleJob("52 15 * * *", async function () {
+    const today = new Date();
     const startDay = startOfDay(today);
     const endDay = endOfDay(today);
 
