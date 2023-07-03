@@ -1,22 +1,9 @@
-const fs = require("fs").promises;
-const path = require("path");
 const process = require("process");
-const { authenticate } = require("@google-cloud/local-auth");
 const { google } = require("googleapis");
 
-// If modifying these scopes, delete token.json.
-// const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
 const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
 const getEvents = async (timeMin, timeMax) => {
-  console.log("BOT_ID", process.env.BOT_ID);
-  console.log("BOT_TOKEN", process.env.BOT_TOKEN);
-  console.log("CALENDAR_ID", process.env.CALENDAR_ID);
-  console.log("HOLIDAY_CALENDAR_ID", process.env.HOLIDAY_CALENDAR_ID);
-  console.log("GOOGLE_PRIVATE_KEY", process.env.GOOGLE_PRIVATE_KEY);
-  console.log("GOOGLE_CLIENT_EMAIL", process.env.GOOGLE_CLIENT_EMAIL);
-  console.log("GOOGLE_PROJECT_NUMBER", process.env.GOOGLE_PROJECT_NUMBER);
-
   const jwtClient = new google.auth.JWT(
     process.env.GOOGLE_CLIENT_EMAIL,
     null,
