@@ -1,0 +1,20 @@
+# 텔레그램 채팅방 ID
+BOT_ID= 
+
+# 텔레그램 봇 토큰
+BOT_TOKEN=
+
+# 휴가자 구글 캘린더 그룹 ID
+CALENDAR_ID=
+
+# 공휴일 구글 캘린더 그룹 ID
+HOLIDAY_CALENDAR_ID='ko.south_korea#holiday@group.v.calendar.google.com'
+
+# 구글 캘린더 API PRIVATE KEY
+GOOGLE_PRIVATE_KEY=
+
+# 구글 캘린더 Email
+GOOGLE_CLIENT_EMAIL=
+
+# 구글 캘린더 API 프로젝트 Number
+GOOGLE_PROJECT_NUMBER=
