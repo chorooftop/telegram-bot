@@ -1,4 +1,12 @@
 # telegram-bot
+
+> 사용한 기능 및 라이브러리
+- Git Actions (코드 실행)
+- node-telegram-bot-api (텔레그램과 연결)
+- date-fns (날짜 계산)
+<br/>
+<br/>
+
 > 개발 목적 및 용도
  
 텔레그램 그룹 채팅방에서 평일 오전 10시 마다 이슈 공유와 오늘 할 일에 대해 간단한 스탠딩 미팅을 진행하는데
@@ -63,5 +71,8 @@
     // 구글캘린더에서 공휴일 CALENDAR_ID 적용
     calendarId: process.env.HOLIDAY_CALENDAR_ID
   ````
+
+
+
 
  
