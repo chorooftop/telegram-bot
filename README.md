@@ -1,0 +1,67 @@
+# telegram-bot
+> 개발 목적 및 용도
+ 
+텔레그램 그룹 채팅방에서 평일 오전 10시 마다 이슈 공유와 오늘 할 일에 대해 간단한 스탠딩 미팅을 진행하는데
+시간을 깜빡하는 인원들을 위해 오전 10시 마다 채팅방에서 미팅시간임을 알려주는 텔레그램 알림 봇이 있으면 좋겠다고 생각해서 개발하게 되었습니다.
+
+<br/>
+<br/>
+
+> 기능
+
+- 평일 오전 10시마다 스탠딩 미팅 시간이라는 글과 함께
+구글 캘린더에서 금일 휴가자 리스트를 보여줍니다.
+<br/>
+
+  ````
+  const res = await calendar.events.list({
+    calendarId: process.env.CALENDAR_ID, // 가져올 구글 캘린더 ID 
+    timeMin: timeMin.toISOString(), // 가져올 시작 시간 ~
+    timeMax: timeMax.toISOString(), // 가져올 ~ 끝 시간
+    maxResults: 10, // 최대 갯수
+    singleEvents: true, // 반복 이벤트를 반환 할건지 여부
+    orderBy: "startTime", // 정렬 형식
+  });
+  ````
+  
+<br/>
+<img width="821" alt="image" src="https://github.com/chorooftop/telegram-bot/assets/121594406/9944d6b8-f678-4166-9f7e-f5d16ec0a778">
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+- 휴가자가 없을 때는 없음 메세지를 보여줍니다.
+<br/>
+
+  ````
+    // 가져온 events가 없을 경우 
+  const dateVal = `<b>${format(
+    new Date(),
+    "yyyy년 MM월 dd일"
+  )}</b> 스탠드 미팅 시간입니다. \n\n`;
+  
+  if (events.length === 0) return `${dateVal}  오늘 휴가자는 없습니다.`;
+  ````
+  
+<br/>
+<img width="331" alt="image" src="https://github.com/chorooftop/telegram-bot/assets/121594406/1e608404-1ca0-48b0-a250-e1251aeee354">
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+- 공휴일 및 주말에는 메세지를 전송하지 않습니다.
+  ````
+    // 구글캘린더에서 공휴일 CALENDAR_ID 적용
+    calendarId: process.env.HOLIDAY_CALENDAR_ID
+  ````
+
+ 
