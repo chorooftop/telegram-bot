@@ -1,5 +1,10 @@
 # telegram-bot
 
+블로그 : https://chorooftop.tistory.com/5
+<br/>
+<br/>
+<br/>
+
 > 사용한 기능 및 라이브러리
 - Git Actions (코드 실행)
 - node-telegram-bot-api (텔레그램과 연결)
